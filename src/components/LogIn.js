@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
-import {  useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { apiRequest } from '../requests';
+import { login } from '../reducers/userReducer';
 
-export default function Login({ setCurrentUser }) {
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
+
+export default function Login() {
   const nav = useNavigate();
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleLogin(event) {
-    event.preventDefault();
-    event.target.reset();
-    nav('/User')
-
-
-    const user = { username, password };
-
-    fetch('http://localhost:3000/api/v1/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user }),
-    })
-      .then((r) => r.json())
-      .then((response) => {
-        localStorage.token = response.jwt;
-        setCurrentUser(response.user);
-      });
+  const handleLogin = async (user) => {
+    const res = await apiRequest({ path: '/login', type: 'post', body: { user: user } })
+    if (res.status == 201) {
+      dispatch(login(res.data))
+      nav('/User')
+      toast.success(`Successfully logged in`)
+    } else {
+      toast.error(`Error!!! ${res.data.message}`)
+    }
   }
 
   return (
     <div>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={(e) => { e.preventDefault(); handleLogin({username, password }); e.target.reset(); } }>
         <br />
         <input
           type="text"
@@ -57,5 +52,5 @@ export default function Login({ setCurrentUser }) {
       <br />
       <br />
     </div>
-  );
+  )
 }

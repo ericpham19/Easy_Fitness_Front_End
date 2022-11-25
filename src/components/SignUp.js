@@ -15,9 +15,8 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch()
 
-  const createUser = async (user) => {  
+  const createUser = async (user) => {
     const res = await apiRequest({path: '/sign_up', type: 'post', body: { user: user }})
-    debugger
     if(res.status == 200) {
       dispatch(setRegisterUser(res.data))
       nav('/login')
@@ -30,7 +29,7 @@ export default function SignUp() {
     <div>
         <div>
           <br />
-          <form onSubmit={(e)=> { e.preventDefault(); createUser({username, email, password}) } }>
+          <form onSubmit={(e)=> { e.preventDefault(); e.target.reset(); createUser({username, email, password}) } }>
             <input
               type="text"
               name="email"
