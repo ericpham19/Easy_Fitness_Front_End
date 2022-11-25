@@ -14,7 +14,8 @@ import Navbar from './components/Navbar';
 import SessionsPage from "./Pages/SessionsPage"
 import FrontPage from './Pages/FrontPage';
 import UserPage from './Pages/UserPage';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <BrowserRouter>
         <Navbar></Navbar>
         <Routes>

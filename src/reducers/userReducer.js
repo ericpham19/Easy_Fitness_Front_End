@@ -1,12 +1,29 @@
-const userReducer = (state = { user : null, isLoggedIn: false }, action) => {
-    switch (action.type) {
-        case 'SET_USER':
-        return { ...state, user: action.payload, isLoggedIn: true };
-        case 'LOG_OUT':
-        return { ...state, user: null, isLoggedIn: false };
-        default:
-        return state;
-    }
+import { createSlice } from '@reduxjs/toolkit'
+import { registerUserAction } from '../actions/userActions'
+
+const initialState = {
+  loading: false,
+  userInfo: {}, 
+  userToken: null,
+  error: null,
+  success: false,
 }
 
-export default userReducer;
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setRegisterUser: (state, payload) => {
+        debugger
+        return {
+            ...state,
+            userToken: payload.payload.jwt,
+            userInfo: payload.payload.user,
+            success: true,
+        }
+    }
+  },
+})
+export const { setRegisterUser } = userSlice.actions
+
+export default userSlice.reducer
