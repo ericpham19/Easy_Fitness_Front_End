@@ -12,16 +12,10 @@ const Users = () => {
       <h1 class='my-5'>{userInfo.username}</h1>
       <p class='my-5'>{userInfo.email}</p>
      
-        {userInfo.sessions.map((session) => (
-          <div key= {session.id}> 
        
-          <h1>{session.name}</h1>
-          <h1>{session.notes}</h1>
-          
-          </div>
           
 
-        ))}
+    
 
       
       <NavLink class="text-xl" to="/logout" style={{color: 'red'}}>Logout</NavLink>

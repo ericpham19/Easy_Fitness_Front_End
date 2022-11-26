@@ -13,7 +13,7 @@ import UserPage from './Pages/UserPage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
-
+import RecordPage from './Pages/RecordPage';
 
 function App() {
   return (
@@ -33,6 +33,11 @@ function App() {
           <Route path="/user" element={
             <ProtectedRoutes>
               <UserPage />
+            </ProtectedRoutes>} 
+            />
+            <Route path="/records" element={
+            <ProtectedRoutes>
+              <RecordPage />
             </ProtectedRoutes>} 
             />
         </Routes>
