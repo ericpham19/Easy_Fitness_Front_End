@@ -1,33 +1,24 @@
-import {useState, useEffect} from 'react'
+
 import axios from "axios";
-const UseAxios = (param) => {
-    const [response, setResponse] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('');
-    axios.defaults.baseURL= 'http://localhost:3000/api/v1'
-    
-    const fetchData= async (param) => {
-        try{
-            setLoading(true)
-            const result= await axios.get(param)
-            setResponse(result.data)
-        } catch (err) {
-            setError(err);
-            
-        } finally {
-            setLoading(false);
-        }
-    }
+axios.defaults.baseURL = "http://localhost:3000/api/v1";
 
-    useEffect(() => {
-        fetchData(param)
-    }, [])
-
-    
-
-  return {
-        response, loading, error
+axios.defaults.headers = {
+    'Content-Type': 'application/json',
+};
+  
+export const apiRequest = async (args) => {
+  const { type, path, body, params } = args;
+  try {
+    const res = await axios[type](
+      path,
+      {
+        ...(body && body),
+        ...(type == "get" && params && { params }),
+      },
+      { ...(type != "get" && params && { params }) }
+    );
+    return res;
+  } catch (err) {
+    return err.response;
   }
-}
-
-export default UseAxios;
+};

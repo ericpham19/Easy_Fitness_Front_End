@@ -1,53 +1,31 @@
-import React, { useState, useEffect} from 'react';
-import UseAxios from  "../hooks/Axios";
-import SessionsPage from '../Pages/SessionsPage';
+import React from 'react'
+import { useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom';
 
 
-export default function Sessions() {
-  const {response} = UseAxios('/sessions')
-  console.log(response)
-
-
-
-
-  
-//  useEffect(()=> {
-//     fetch(SessionURL, {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.token}`,
-//           'Content-Type': 'application/json',
-//           Accept: 'application/json',
-//         },
-//       })
-//         .then((res) => res.json())
-//         .then((sessions) => setSessions(sessions));
-//  },[])
-    
-  
-
+ const Sessions = () => {
+  const userInfo = useSelector((state) => state.user.userInfo)
+  console.log(userInfo)
   return (
+    <div>
+     
+        {userInfo.sessions.map((session) => (
+          <div key= {session.id}> 
+       
+          <h1>{session.name}</h1>
+          <h1>{session.notes}</h1>
+          
+          </div>
+          
 
+        ))}
 
-    <div className="mt-8">
-    <h1 className="text-4xl mb-2 text-center">Sessions</h1>
-    {response && response.sessions.map(session=> <SessionsPage key={session.id} name={session.name} notes={session.notes}/>)}\
-   
-  </div>
-
-
-    // <div>
-    //     {sessions.map((session) => {
-    //         return <div key= {session.id}>
-    //                 <h2>{session.name}</h2>
-    //                 <p>{session.notes}</p>
-    //            
-    //             </div>
-                
-    //         })}
       
-      
-    // </div>
-  
+      <NavLink class="text-xl" to="/logout" style={{color: 'red'}}>Logout</NavLink>
+
+    </div>
   )
-    
+   
 }
+
+export default Sessions;

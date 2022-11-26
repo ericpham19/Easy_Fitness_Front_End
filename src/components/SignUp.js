@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRegisterUser } from '../reducers/userReducer';
+import { setRegisterUser } from '../reducers/userSlice';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { apiRequest } from '../requests';
+import { apiRequest } from '../hooks/Axios';
 
 
 

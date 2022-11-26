@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { apiRequest } from '../requests';
-import { login } from '../reducers/userReducer';
+import { apiRequest } from '../hooks/Axios';
+import { login } from '../reducers/userSlice';
 
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';

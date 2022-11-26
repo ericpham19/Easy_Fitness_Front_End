@@ -26,7 +26,7 @@ function App() {
           <Route path="/login" element={<LogInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/logout" element={<LogoutPage />} />
-          <Route path="/sessionspage" element={
+          <Route path="/sessions" element={
             <ProtectedRoutes>
               <SessionsPage />
             </ProtectedRoutes>} />
