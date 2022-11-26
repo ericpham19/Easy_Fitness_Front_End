@@ -7,7 +7,7 @@ function Record() {
   return (
     <div>
      
-        {userInfo.sessions[0].exercises.map((exercise) => (
+        {userInfo.sessions.length > 0 ?  (userInfo.sessions[0]?.exercises.map((exercise) => (
           <div key= {exercise.id}> 
           <h1>{exercise.name}</h1>
           <h1>{exercise.set}</h1>
@@ -17,7 +17,8 @@ function Record() {
           </div>
           
 
-        ))}
+        ))) : "No exercies found"   
+    }
 
       
       
