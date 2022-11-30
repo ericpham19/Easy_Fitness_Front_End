@@ -4,17 +4,35 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { apiRequest } from "../hooks/Axios";
 import { useNavigate } from "react-router-dom";
+import { TextField, Grid } from "@mui/material";
+import { Container } from '@mui/system';
+import { Dialog, Button, DialogContent, DialogTitle, DialogActions, DialogContentText } from "@mui/material";
+import ExercisesModal from "./ExercisesModal";
 
 const Sessions = () => {
   const nav = useNavigate();
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log(userInfo)
+  const [selectedExercies, setSelectedExercies] = useState([]);
+  console.log(selectedExercies)
   const [name, setName] = useState("");
   const [set, setSet] = useState("");
   const [weight_kg, setWeight_kg] = useState("");
   const [reps, setReps] = useState("");
-  const [session_id, setSession_id] = useState(userInfo.sessions[0].id);
+  // const [session_id, setSession_id] = useState(userInfo.sessions[0].id);
   const [user_id, setUser_id] = useState(userInfo.id);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const selectExercise = (e) => {
+    setSelectedExercies([...selectedExercies, e])
+  }
 
   const createSession = async (session) => {
     const res = await apiRequest({
@@ -23,76 +41,36 @@ const Sessions = () => {
       body: { session: session },
     });
     if (res.status == 201) {
-      
+
       nav("/records");
       toast.success(`Successfully created a session`);
     } else {
       toast.error(`Error!!! ${res.data.message}`);
-      
     }
   };
 
   return (
-    <div>
-      
+    <Container fluid>
       <div>
-     
-          <form onSubmit={(e)=> { e.preventDefault(); e.target.reset(); createSession({name, set, weight_kg, reps}) } }>
-            <input
-              type="text"
-              name="name"
-              placeholder="Exercise Name"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <br />
-            <input
-              type="text"
-              name="set"
-              placeholder="Set"
-              onChange={(e) => setSet(e.target.value)}
-            />
-            <br />
-            <input
-              type="text"
-              name="weight_kg"
-              placeholder="Weight_kg"
-              onChange={(e) => setWeight_kg(e.target.value)}
-            />
-            <br />
-            <input
-              type="text"
-              name="reps"
-              placeholder="Reps"
-              onChange={(e) => setReps(e.target.value)}
-            />
-            <br />
-            <input
-              type="text"
-              name="session_id"
-              placeholder="session_id"
-              onChange={(e) =>setSession_id(userInfo.sessions[0].id)}
-              
-            />
-            <br />
-            <input
-              type="text"
-              name="user_id"
-              placeholder="User_id"
-              onChange={(e) =>setUser_id(userInfo.id)}
-              
-            />
-            <button type="submit">Submit</button>
-          </form>
-        
+
+        <TextField fullWidth label="Workout Name" id="fullWidth" name="note" onChange={(e) => setName(e.target.value)} sx={{ my: 3 }} />
+        <br />
+        <Button variant="outlined" onClick={handleClickOpen} sx={{ my: 3 }}>
+          Add an Exercise
+        </Button>
       </div>
-
-
       <div>
+        {
+          selectedExercies.map((e) => e.name ) 
+        }
+      </div>
+      <div className="mt-5">
         <NavLink class="text-xl" to="/logout" style={{ color: "red" }}>
           Logout
         </NavLink>
       </div>
-    </div>
+      <ExercisesModal modalOpen={open} handleClose={handleClose} selectExercise={selectExercise} />
+    </Container>
   );
 };
 
