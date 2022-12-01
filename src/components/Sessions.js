@@ -8,12 +8,14 @@ import { TextField, Grid } from "@mui/material";
 import { Container } from '@mui/system';
 import { Dialog, Button, DialogContent, DialogTitle, DialogActions, DialogContentText } from "@mui/material";
 import ExercisesModal from "./ExercisesModal";
+import SessionExercise from "./SessionExercise";
+import Timer from "./Timer";
 
 const Sessions = () => {
   const nav = useNavigate();
   const userInfo = useSelector((state) => state.user.userInfo);
-  const [selectedExercies, setSelectedExercies] = useState([]);
-  console.log(selectedExercies)
+  const selectedExercies = useSelector((state) => state.session.exercises);
+
   const [name, setName] = useState("");
   const [set, setSet] = useState("");
   const [weight_kg, setWeight_kg] = useState("");
@@ -31,7 +33,7 @@ const Sessions = () => {
   };
 
   const selectExercise = (e) => {
-    setSelectedExercies([...selectedExercies, e])
+    // setSelectedExercies([...selectedExercies, e])
   }
 
   const createSession = async (session) => {
@@ -51,8 +53,18 @@ const Sessions = () => {
 
   return (
     <Container fluid>
-      <div>
+      <Grid container spacing={2} sx={{ mb: 3, py: 3 }}>
+        <Grid item xs={6}>
+          <Timer />
+        </Grid>
+        <Grid item xs={6} className="text-end">
+          <Button variant="contained" color="warning">
+            Finish
+          </Button>
+        </Grid>
+      </Grid>
 
+      <div>
         <TextField fullWidth label="Workout Name" id="fullWidth" name="note" onChange={(e) => setName(e.target.value)} sx={{ my: 3 }} />
         <br />
         <Button variant="outlined" onClick={handleClickOpen} sx={{ my: 3 }}>
@@ -61,7 +73,7 @@ const Sessions = () => {
       </div>
       <div>
         {
-          selectedExercies.map((e) => e.name ) 
+          selectedExercies.map((e) => <SessionExercise exercise={e} />)
         }
       </div>
       <div className="mt-5">

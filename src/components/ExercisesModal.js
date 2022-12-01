@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { apiRequest } from "../hooks/Axios";
 import { useNavigate } from "react-router-dom";
-import { TextField, Grid } from "@mui/material";
 import { Dialog, Button, DialogContent, DialogTitle, DialogActions, DialogContentText, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { add_exercise } from "../reducers/SessionReducer";
 
 const ExercisesModal = (props) => {
     const [exercises, setExercies] = React.useState([]);
     const [selectedExercise, setSelectedExercise] = React.useState(null);
+    const dispatch = useDispatch()
 
     const fetchExercies = async () => {
         const res = await apiRequest({
@@ -54,8 +55,7 @@ const ExercisesModal = (props) => {
                 <Button onClick={props.handleClose}>Cancel</Button>
                 <Button onClick={() => {
                     let exercise = exercises.find((e) => e.id == selectedExercise)
-                    exercise.sets = []
-                    props.selectExercise(exercise);
+                    dispatch(add_exercise(exercise))
                     props.handleClose()
                 }}>Select</Button>
             </DialogActions>
