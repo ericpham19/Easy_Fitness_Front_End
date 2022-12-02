@@ -11,6 +11,8 @@ const ExercisesModal = (props) => {
     const [exercises, setExercies] = React.useState([]);
     const [selectedExercise, setSelectedExercise] = React.useState(null);
     const dispatch = useDispatch()
+    const userToken = useSelector((state) => state.user.userToken)
+
 
     const fetchExercies = async () => {
         const res = await apiRequest({

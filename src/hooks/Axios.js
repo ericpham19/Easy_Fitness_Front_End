@@ -4,10 +4,11 @@ axios.defaults.baseURL = "http://localhost:3000/api/v1";
 
 axios.defaults.headers = {
     'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('userToken')
 };
   
 export const apiRequest = async (args) => {
-  const { type, path, body, params } = args;
+  const { type, path, body, params, headers } = args;
   try {
     const res = await axios[type](
       path,
