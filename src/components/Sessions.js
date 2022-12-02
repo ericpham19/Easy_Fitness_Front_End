@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { apiRequest } from "../hooks/Axios";
@@ -10,14 +10,14 @@ import { Dialog, Button, DialogContent, DialogTitle, DialogActions, DialogConten
 import ExercisesModal from "./ExercisesModal";
 import SessionExercise from "./SessionExercise";
 import Timer from "./Timer";
+import { set_notes } from "../reducers/SessionReducer";
 
 const Sessions = () => {
   const nav = useNavigate();
-  const userInfo = useSelector((state) => state.user.userInfo);
   const selectedExercies = useSelector((state) => state.session.exercises);
   const session = useSelector((state) => state.session);
+  const dispatch = useDispatch()
 
-  const [name, setName] = useState("");
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -29,7 +29,6 @@ const Sessions = () => {
   };
 
   const createSession = async () => {
-    debugger
     const res = await apiRequest({
       path: "/sessions",
       type: "post",
@@ -57,7 +56,7 @@ const Sessions = () => {
       </Grid>
 
       <div>
-        <TextField fullWidth label="Workout Notes" id="fullWidth" name="note" onChange={(e) => setName(e.target.value)} sx={{ my: 3 }} />
+        <TextField fullWidth label="Workout Notes" id="fullWidth" name="note" onChange={(e) => dispatch(set_notes(e.target.value))} sx={{ my: 3 }} />
         <br />
         <Button variant="outlined" onClick={handleClickOpen} sx={{ my: 3 }}>
           Add an Exercise

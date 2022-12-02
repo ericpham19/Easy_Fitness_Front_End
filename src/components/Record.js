@@ -1,32 +1,79 @@
 import React from 'react'
-import { useSelector } from "react-redux";
-function Record() {
-    const userInfo = useSelector((state) => state.user.userInfo)
-    console.log(userInfo)
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import { Grid, ListItemIcon, Accordion, AccordionSummary, Typography, AccordionDetails } from '@mui/material';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Sessions from './Sessions';
+
+function Record({ session }) {
+  let bestWeght = Math.max(...(session.session_exercises).map((e) => Math.max(...e.exercise_sets.map((s)=> s.weight))))
 
   return (
-    <div>
-     
-        {userInfo.sessions.length > 0 ?  (userInfo.sessions[0]?.exercises.map((exercise) => (
-          <div key= {exercise.id}> 
-          <h1>{exercise.name}</h1>
-          <h1>{exercise.set}</h1>
-          <h1>{exercise.weight_kg}</h1>
-          <h1>{exercise.reps}</h1>
-          
-          </div>
-          
+    <Grid item xs={6}>
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            {session.notes || "Notes Not Available"}
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <b>Time: </b>{(new Date(Date.parse(session.created_at))).toDateString()}
+          </Typography>
+          <Grid container>
+            <Grid item xs={6} sx={{ mb: 1.5 }} color="text.secondary">
+              <ListItemIcon style={{ textAlign: "center" }}>
+                <div>
+                  <AccessTimeFilledIcon color="primary" fontSize="medium" sx={{ mr: 1 }} />
+                  {session.duration}
+                </div>
+              </ListItemIcon>
+            </Grid>
+            <Grid item xs={6} sx={{ mb: 1.5 }} color="text.secondary">
+              <ListItemIcon style={{ textAlign: "center" }}>
+                <div>
+                  <FitnessCenterIcon color="primary" fontSize="medium" sx={{ mr: 1 }} />
+                  {session.session_exercises.reduce((sum, e) => sum + e.exercise_sets.reduce((sum, set) => sum + set.weight, 0), 0)}
+                </div>
+              </ListItemIcon>
+            </Grid>
+          </Grid>
 
-        ))) : "No exercies found"   
-    }
+          <Grid container>
+            <Grid item xs={6} sx={{ mb: 1.5 }} color="text.secondary">
+              <b>Best weight: </b>
+            </Grid>
+            <Grid item xs={6} sx={{ mb: 1.5 }} color="text.secondary">
+              <ListItemIcon style={{ textAlign: "center" }}>
+                <div>
+                  <FitnessCenterIcon color="primary" fontSize="medium" sx={{ mr: 1 }} />
+                  { bestWeght == -Infinity ? 0 : bestWeght }
+                </div>
+              </ListItemIcon>
+            </Grid>
+          </Grid>
 
-      
-      
-
-    </div>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Exerciess</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {session.session_exercises.map(e => <Box>{e.name} x {e.exercise_sets.length} ({e.exercise_sets.map((s) => s.weight).join('/')})</Box>)}
+            </AccordionDetails>
+          </Accordion>
+        </CardContent>
+      </Card>
+    </Grid>
   )
-   
-  
+
+
 }
 
 export default Record

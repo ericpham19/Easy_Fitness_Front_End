@@ -38,10 +38,16 @@ const SessionReducer = createSlice({
                 ...state,
                 duration: payload.payload
             }
-        }
+        },
+        set_notes: (state, payload) => {
+            return {
+                ...state,
+                notes: payload.payload
+            }
+        },
     }
 })
     // console.log(userSlice)
-export const { add_exercise, add_set, update_set, set_duration } = SessionReducer.actions
+export const { add_exercise, add_set, update_set, set_duration, set_notes } = SessionReducer.actions
 
 export default SessionReducer.reducer
