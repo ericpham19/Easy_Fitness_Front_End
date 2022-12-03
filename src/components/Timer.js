@@ -10,8 +10,8 @@ const Timer = (props) => {
         let interval;
         interval = setInterval(() => {
             dispatch(set_duration(millisecondsToString(time)))
-            setTime((prevTime) => prevTime + 100);
-        }, 100);
+            setTime((prevTime) => prevTime + 1000);
+        }, 1000);
         return () => clearInterval(interval);
     }, [time]);
 

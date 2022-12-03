@@ -11,7 +11,6 @@ const RecordPage = () => {
   const dispatch = useDispatch()
   const [sessions, setSessions] = useState([])
 
-
   const fetchSessions = async () => {
     const res = await apiRequest({
       path: "/sessions",
@@ -19,7 +18,7 @@ const RecordPage = () => {
     });
     if (res.status == 200) {
       setSessions(res.data)
-      toast.success(`Successfully created a session`);
+      toast.success(`Session data fetched successfully`);
     } else {
       toast.error(`Error!!! ${res.data.message}`);
     }

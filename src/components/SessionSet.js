@@ -16,10 +16,10 @@ const SessionSet = (props) => {
         dispatch(update_set(set))
     }
 
-    const toggleComplete = (e) => {
-        setSet({...set, completed: !set.completed});
-        console.log(set)
-        dispatch(update_set(set))
+    const toggleComplete = (completed) => {
+        let newSet = {...set, completed: completed}
+        setSet(newSet);
+        dispatch(update_set(newSet))
     }
 
 
@@ -66,7 +66,7 @@ const SessionSet = (props) => {
                 />
             </Grid>
             <Grid item xs={2}>
-                <Button variant={set.completed ? 'contained' : 'outlined'} color="success" onClick={toggleComplete}>{set.completed ? 'Completed' : 'Mark complete'}</Button>
+                <Button variant={set.completed ? 'contained' : 'outlined'} color="success" onClick={()=>toggleComplete(!set.completed)}>{set.completed ? 'Completed' : 'Mark complete'}</Button>
             </Grid>
         </Grid>
     )
