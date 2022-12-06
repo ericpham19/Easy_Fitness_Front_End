@@ -10,7 +10,7 @@ import { Dialog, Button, DialogContent, DialogTitle, DialogActions, DialogConten
 import ExercisesModal from "./ExercisesModal";
 import SessionExercise from "./SessionExercise";
 import Timer from "./Timer";
-import { set_notes } from "../reducers/SessionReducer";
+import { set_notes, cancelSession } from "../reducers/SessionReducer";
 
 const Sessions = () => {
   const nav = useNavigate();
@@ -67,7 +67,13 @@ const Sessions = () => {
           selectedExercies.map((e) => <SessionExercise exercise={e} />)
         }
       </div>
-      <div className="mt-5">
+      <div className="mt-4">
+        <NavLink class="text-xl" style={{ color: "red" }} to="/" onClick={()=>{ dispatch(cancelSession());  toast.success(`Session cancelled successfully`); }}>
+          Cancel Workout
+        </NavLink>
+      </div>
+      <div className="mt-4">
+
         <NavLink class="text-xl" to="/logout" style={{ color: "red" }}>
           Logout
         </NavLink>

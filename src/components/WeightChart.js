@@ -30,7 +30,7 @@ const WeightChart = () => {
             labels: sessions.labels,
             datasets: [
                 {
-                    label: 'Weights',
+                    label: 'Sessions',
                     data: sessions.data
                 }
             ]

@@ -28,6 +28,18 @@ const RecordPage = () => {
     fetchSessions()
   }, []);
 
+  const deleteRecord = async (id) => {
+    const res = await apiRequest({
+      path: `/sessions/${id}`,
+      type: "delete",
+    });
+    if (res.status == 200) {
+      setSessions(sessions.filter((s) => s.id != id))
+      toast.success(`Session deleted successfully`);
+    } else {
+      toast.error(`Error!!! ${res.data.message}`);
+    }
+  };
 
   return (
     <Container fluid sx={{ py: 3 }}>
@@ -36,7 +48,7 @@ const RecordPage = () => {
         </Typography>
       <Grid container spacing={3}>
         {
-          sessions.length > 0 ? (sessions.map((s) => <Record session={s} />)) : 'No Session Found'
+          sessions.length > 0 ? (sessions.map((s) => <Record session={s} deleteRecord = {deleteRecord} />)) : 'No Session Found'
         }
       </Grid>
     </Container>

@@ -10,13 +10,16 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Sessions from './Sessions';
 
-function Record({ session }) {
+function Record({ session, deleteRecord }) {
   let bestWeight = Math.max(...(session.session_exercises).map((e) => Math.max(...e.exercise_sets.map((s)=> s.weight))))
 
   return (
     <Grid item xs={6}>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
+          <div class="text-end">
+            <Button color='warning' onClick={()=> deleteRecord(session.id) }>Delete</Button>
+          </div>
           <Typography variant="h5" component="div">
             {session.notes || "Notes Not Available"}
           </Typography>
