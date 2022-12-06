@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Sessions from './Sessions';
 
 function Record({ session }) {
-  let bestWeght = Math.max(...(session.session_exercises).map((e) => Math.max(...e.exercise_sets.map((s)=> s.weight))))
+  let bestWeight = Math.max(...(session.session_exercises).map((e) => Math.max(...e.exercise_sets.map((s)=> s.weight))))
 
   return (
     <Grid item xs={6}>
@@ -50,7 +50,7 @@ function Record({ session }) {
               <ListItemIcon style={{ textAlign: "center" }}>
                 <div>
                   <FitnessCenterIcon color="primary" fontSize="medium" sx={{ mr: 1 }} />
-                  { bestWeght == -Infinity ? 0 : bestWeght }
+                  { bestWeight == -Infinity ? 0 : bestWeight }
                 </div>
               </ListItemIcon>
             </Grid>
@@ -62,7 +62,7 @@ function Record({ session }) {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography>Exerciess</Typography>
+              <Typography>Exercises</Typography>
             </AccordionSummary>
             <AccordionDetails>
               {session.session_exercises.map(e => <Box>{e.name} x {e.exercise_sets.length} ({e.exercise_sets.map((s) => s.weight).join('/')})</Box>)}
