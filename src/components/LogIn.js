@@ -17,7 +17,7 @@ export default function Login() {
     const res = await apiRequest({ path: '/login', type: 'post', body: { user: user } })
     if (res.status == 201) {
       dispatch(login(res.data))
-      nav('/User')
+      nav('/')
       toast.success(`Successfully logged in`)
     } else {
       toast.error(`Error!!! ${res.data.message}`)

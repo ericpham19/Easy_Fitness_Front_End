@@ -26,7 +26,7 @@ const SessionReducer = createSlice({
         },
         update_set: (state, payload) => {
             let sets = [...state.sets]
-            let index = state.sets.findIndex((s) => s.id == payload.payload.id)
+            let index = state.sets.findIndex((s) => s.id === payload.payload.id)
             sets[index] = {...sets[index], weight: payload.payload.weight, reps: payload.payload.reps, completed: payload.payload.completed}
             return {
                 ...state,
@@ -52,7 +52,7 @@ const SessionReducer = createSlice({
         }
     }
 })
-    // console.log(userSlice)
+   
 export const { add_exercise, add_set, update_set, set_duration, set_notes, cancelSession } = SessionReducer.actions
 
 export default SessionReducer.reducer

@@ -40,10 +40,11 @@ const Sessions = () => {
     } else {
       toast.error(`Error!!! ${res.data.message}`);
     }
+   console.log(res)
   };
 
   return (
-    <Container fluid>
+    <Container maxWidth="lg">
       <Grid container spacing={2} sx={{ mb: 3, py: 3 }}>
         <Grid item xs={6}>
           <Timer />

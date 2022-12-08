@@ -10,7 +10,7 @@ const SessionExercise = (props) => {
     const dispatch = useDispatch()
     const all_sets = useSelector((state) => state.session.sets);
     const sets = all_sets.filter(s => s.exercise_id == props.exercise.id)
-
+      
 
     return (
         <Accordion>
@@ -28,7 +28,7 @@ const SessionExercise = (props) => {
                             SET
                         </Grid>
                         <Grid item xs={4}>
-                            WEIGHT
+                            WEIGHT <b>kg</b>
                         </Grid>
                         <Grid item xs={4}>
                             REPETITIONS

@@ -22,8 +22,10 @@ export default function SignUp() {
       nav('/login')
       toast.success(`Successfully signed up`)
     } else {
+      
       toast.error(`Error!!! ${res.data.message}`)
     }
+    
   }
   return (
     <div>

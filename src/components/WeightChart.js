@@ -6,6 +6,7 @@ import { Chart as ChartJS } from 'chart.js/auto'
 import { Bar }            from 'react-chartjs-2'
 
 const WeightChart = () => {
+    ChartJS.defaults.datasets.bar.maxBarThickness = 73;
     const [sessions, setSessions] = useState({})
 
     const fetchSessions = async () => {
@@ -38,7 +39,7 @@ const WeightChart = () => {
     }
 
     return (
-        <Container fluid sx={{ py: 5 }}>
+        <Container  maxWidth="lg" sx={{ py: 5 }}>
             <Box className="chart-container w-50" sx={{width: '80%', mx: 'auto'}}>
                 <h2 style={{ textAlign: "center" }}>Weights Analytics</h2>
                 <Bar

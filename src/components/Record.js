@@ -4,15 +4,16 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import { Grid, ListItemIcon, Accordion, AccordionSummary, Typography, AccordionDetails } from '@mui/material';
+import { Grid, ListItemIcon, Accordion, AccordionSummary, Typography, AccordionDetails} from '@mui/material';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Sessions from './Sessions';
 
-function Record({ session, deleteRecord }) {
+function Record({ session, deleteRecord}) {
   let bestWeight = Math.max(...(session.session_exercises).map((e) => Math.max(...e.exercise_sets.map((s)=> s.weight))))
-
+   console.log(session)
+  
   return (
     <Grid item xs={6}>
       <Card sx={{ minWidth: 275 }}>
@@ -39,7 +40,7 @@ function Record({ session, deleteRecord }) {
               <ListItemIcon style={{ textAlign: "center" }}>
                 <div>
                   <FitnessCenterIcon color="primary" fontSize="medium" sx={{ mr: 1 }} />
-                  {session.session_exercises.reduce((sum, e) => sum + e.exercise_sets.reduce((sum, set) => sum + set.weight, 0), 0)}
+                 <b>Total Weight</b>  {session.session_exercises.reduce((sum, e) => sum + e.exercise_sets.reduce((sum, set) => sum + set.weight, 0), 0)}
                 </div>
               </ListItemIcon>
             </Grid>
@@ -68,7 +69,8 @@ function Record({ session, deleteRecord }) {
               <Typography>Exercises</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {session.session_exercises.map(e => <Box>{e.name} x {e.exercise_sets.length} ({e.exercise_sets.map((s) => s.weight).join('/')})</Box>)}
+              {session.session_exercises.map(e => <Box><b>{e.name}</b> x {e.exercise_sets.length} {e.exercise_sets.map((s) => <Box>{s.weight}kg x {s.reps}reps  </Box>) }</Box>)}
+          
             </AccordionDetails>
           </Accordion>
         </CardContent>

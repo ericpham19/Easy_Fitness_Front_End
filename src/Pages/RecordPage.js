@@ -5,7 +5,7 @@ import { apiRequest } from '../hooks/Axios';
 import { toast } from 'react-toastify';
 import { Container } from '@mui/system';
 import { Grid, Typography } from '@mui/material';
-
+import Box from '@mui/material/Box';
 
 const RecordPage = () => {
   const dispatch = useDispatch()
@@ -42,17 +42,20 @@ const RecordPage = () => {
   };
 
   return (
-    <Container fluid sx={{ py: 3 }}>
+    <Container maxWidth="lg" sx={{ py: 3 }}>
       <Typography variant="h4" component="div" sx={{mb: 2}}>
           Workout History
         </Typography>
-      <Grid container spacing={3}>
+      <Grid display= "grid" container spacing={3}  >
+      
         {
-          sessions.length > 0 ? (sessions.map((s) => <Record session={s} deleteRecord = {deleteRecord} />)) : 'No Session Found'
+          sessions.length > 0 ? (sessions.map((s) => <Record key={s.id} session={s} deleteRecord = {deleteRecord} />)) : <Box justifyContent= "center" alignItems="center" sx={{ m: 2 }}>No Session Found</Box>
         }
+    
+        
       </Grid>
     </Container>
-  )
+  ) 
 }
 
 export default RecordPage
