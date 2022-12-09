@@ -8,7 +8,7 @@ import { Grid, ListItemIcon, Accordion, AccordionSummary, Typography, AccordionD
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Sessions from './Sessions';
+
 
 function Record({ session, deleteRecord}) {
   let bestWeight = Math.max(...(session.session_exercises).map((e) => Math.max(...e.exercise_sets.map((s)=> s.weight))))
@@ -69,7 +69,8 @@ function Record({ session, deleteRecord}) {
               <Typography>Exercises</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {session.session_exercises.map(e => <Box><b>{e.name}</b> x {e.exercise_sets.length} {e.exercise_sets.map((s) => <Box>{s.weight}kg x {s.reps}reps  </Box>) }</Box>)}
+              {session.session_exercises.map(e => <Box key={e.id}
+              ><b>{e.name}</b> x {e.exercise_sets.length} {e.exercise_sets.map((s) => <Box key={s.id}>{s.weight}kg x {s.reps}reps  </Box>) }</Box>)}
           
             </AccordionDetails>
           </Accordion>

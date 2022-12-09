@@ -3,7 +3,7 @@ import { millisecondsToString } from "../helpers/time_formatter";
 import { set_duration } from "../reducers/SessionReducer";
 import { useDispatch } from "react-redux";
 
-const Timer = (props) => {
+const Timer = () => {
     const dispatch = useDispatch()
     const [time, setTime] = useState(0);
     useEffect(() => {
@@ -13,7 +13,7 @@ const Timer = (props) => {
             setTime((prevTime) => prevTime + 1000);
         }, 1000);
         return () => clearInterval(interval);
-    }, [time]);
+    }, [dispatch, time]);
 
 
     return (

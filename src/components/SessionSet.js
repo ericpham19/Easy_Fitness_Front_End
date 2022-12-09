@@ -31,15 +31,16 @@ const SessionSet = (props) => {
             <Grid item xs={4}>
                 <TextField
                     id="weight"
-                    min="0"
+                    min="1"
                     type="number"
+                    defaultValue="0"
                     onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         inputProps: { 
-                            max: 999, min: 0 
+                            max: 999, min: 0
                         }
                     }}
                     size="small"
@@ -49,16 +50,18 @@ const SessionSet = (props) => {
             </Grid>
             <Grid item xs={4}>
                 <TextField
+                    required
                     id="reps"
-                    min="0"
+                    min="1"
                     type="number"
+                    defaultValue="0"
                     onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
                     InputProps={{
                         inputProps: { 
-                            max: 999, min: 0 
+                            max: 999, min: 1
                         }
                     }}
                     size="small"

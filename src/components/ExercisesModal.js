@@ -21,7 +21,7 @@ const ExercisesModal = (props) => {
         });
         if (res.status == 200) {
             setExercies(res.data)
-            toast.success(`Exercies data fetched!`);
+            
         } else {
             toast.error(`Error!!! ${res.data.message}`);
         }
@@ -47,7 +47,7 @@ const ExercisesModal = (props) => {
                     >
                         {
                             exercises.map((e) =>
-                                <FormControlLabel value={e.id} control={<Radio size="large" />} label={e.name} />
+                                <FormControlLabel key={e.id} value={e.id} control={<Radio size="medium" />} label={e.name} />
                             )
                         }
                     </RadioGroup>
