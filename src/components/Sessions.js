@@ -11,15 +11,17 @@ import ExercisesModal from "./ExercisesModal";
 import SessionExercise from "./SessionExercise";
 import Timer from "./Timer";
 import { set_notes, cancelSession } from "../reducers/SessionReducer";
+import {v4 as uuidv4} from 'uuid';
 
 const Sessions = () => {
   const nav = useNavigate();
   const selectedExercies = useSelector((state) => state.session.exercises);
+
   const session = useSelector((state) => state.session);
   const dispatch = useDispatch()
 
   const [open, setOpen] = React.useState(false);
-
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,7 +42,7 @@ const Sessions = () => {
     } else {
       toast.error(`Error!!! ${res.data.message}`);
     }
-   console.log(res)
+    
   };
 
   return (
@@ -65,7 +67,7 @@ const Sessions = () => {
       </div>
       <div>
         {
-          selectedExercies.map((e) => <SessionExercise exercise={e} />)
+          selectedExercies.map((e) => <SessionExercise key={uuidv4()} exercise={e} />)
         }
       </div>
       <div className="mt-4">
