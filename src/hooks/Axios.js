@@ -1,6 +1,6 @@
 
 import axios from "axios";
-axios.defaults.baseURL = process.env.SERVER_URL;
+axios.defaults.baseURL = "http://localhost:3000/api/v1";
 
 axios.defaults.headers = {
     'Content-Type': 'application/json',
