@@ -12,6 +12,7 @@ const SessionReducer = createSlice({
     initialState,
     reducers: {
         add_exercise: (state, payload) => {
+            console.log(payload)
             return {
                 ...state,
                 exercises: [...state.exercises, payload.payload],

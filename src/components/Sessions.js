@@ -24,10 +24,12 @@ const Sessions = () => {
   
   const handleClickOpen = () => {
     setOpen(true);
+    console.log("opening")
   };
 
   const handleClose = () => {
     setOpen(false);
+    console.log("closing")
   };
 
   const createSession = async () => {
@@ -67,7 +69,7 @@ const Sessions = () => {
       </div>
       <div>
         {
-          selectedExercies.map((e) => <SessionExercise key={uuidv4()} exercise={e} />)
+          selectedExercies.map((e) => <SessionExercise key={e.id} exercise={e} />)
         }
       </div>
       <div className="mt-4">

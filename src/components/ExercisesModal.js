@@ -6,13 +6,13 @@ import { apiRequest } from "../hooks/Axios";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Button, DialogContent, DialogTitle, DialogActions, DialogContentText, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { add_exercise } from "../reducers/SessionReducer";
-
+import {v4 as uuidv4} from 'uuid';
 const ExercisesModal = (props) => {
     const [exercises, setExercies] = React.useState([]);
     const [selectedExercise, setSelectedExercise] = React.useState(null);
     const dispatch = useDispatch()
     const userToken = useSelector((state) => state.user.userToken)
-
+    
 
     const fetchExercies = async () => {
         const res = await apiRequest({
@@ -57,6 +57,8 @@ const ExercisesModal = (props) => {
                 <Button onClick={props.handleClose}>Cancel</Button>
                 <Button onClick={() => {
                     let exercise = exercises.find((e) => e.id == selectedExercise)
+                    
+                    exercise.id = uuidv4()
                     dispatch(add_exercise(exercise))
                     props.handleClose()
                 }}>Select</Button>
