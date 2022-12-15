@@ -25,7 +25,7 @@ const FrontPage = () => {
          <NavLink class="text-xl" to="/User">Username: {userInfo.username}</NavLink>
          <div> Please click the button below  to start a session</div>
          <br/>
-         <NavLink class='text-xl' to='/session' style={{fontWeight: 'bold', border: '1px solid black'}}>Create a session</NavLink>
+         <NavLink class='text-xl' to='/sessions' style={{fontWeight: 'bold', border: '1px solid black'}}>Create a session</NavLink>
         <br/>
         <br/>
          <NavLink class="text-xl " to="/logout" style={{color: 'red'}}>Logout</NavLink>
