@@ -15,7 +15,7 @@ function Record({ session, deleteRecord}) {
    console.log(session)
   
   return (
-    <Grid item xs={6}>
+    <Grid item xs={10}  >
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <div class="text-end">

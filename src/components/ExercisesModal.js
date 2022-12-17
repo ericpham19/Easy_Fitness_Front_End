@@ -58,7 +58,7 @@ const ExercisesModal = (props) => {
                 <Button onClick={() => {
                     let exercise = exercises.find((e) => e.id == selectedExercise)
                     
-                    exercise.id = uuidv4()
+                 
                     dispatch(add_exercise(exercise))
                     props.handleClose()
                 }}>Select</Button>

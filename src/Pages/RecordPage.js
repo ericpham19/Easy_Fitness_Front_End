@@ -43,7 +43,7 @@ const RecordPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 3 }}>
-      <Typography variant="h4" component="div" sx={{mb: 2}}>
+      <Typography variant="h4" component="div" sx={{mb: 2}} align="left">
           Workout History
         </Typography>
       <Grid display= "grid" container spacing={3}  >

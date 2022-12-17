@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,12 +24,12 @@ const Sessions = () => {
   
   const handleClickOpen = () => {
     setOpen(true);
-    console.log("opening")
+
   };
 
   const handleClose = () => {
     setOpen(false);
-    console.log("closing")
+   
   };
 
   const createSession = async () => {
